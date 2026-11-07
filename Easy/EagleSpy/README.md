@@ -241,7 +241,7 @@ Once both are granted, `onRequestPermissionsResult()` calls `rakmmoxhsmlszubaybg
 
 ## Task 9 — Internal location of the second-stage payload
 
-**Answer:** `assets/childapp.apk`
+**Answer:** `assets`
 
 **Evidence:** the `install()` method's APK-loading statement.
 
