@@ -3,11 +3,9 @@
 **Category:** Wiper · **Level:** Easy · **Tools:** IDA Pro, PE-bear, FLOSS
 **Platform:** MalOps.io · **Lab:** Windows 10 FLARE-VM · **Questions:** 15 (all solved, 10/10 each)
 
-**Scenario (summary):** A fictional incident at *Meridian Cold Chain Logistics*, a refrigerated-freight operator that loses 340 endpoints in under twenty minutes at 03:14 CET. There is no ransom note, no C2 beacon and no negotiation portal; the machines show "no bootable device" and the recovery partitions are gone. One workstation was pulled from the network mid-execution. As the reverse engineer, you analyse the binary, which still carries the developer's fingerprints.
+**Scenario (summary):** A fictional incident at *Meridian Cold Chain Logistics*, a refrigerated-freight operator that loses 340 endpoints in under twenty minutes on 08 March 2026 at 03:14 CET. There is no ransom note, no C2 beacon and no negotiation portal; the machines show "no bootable device" and the recovery partitions are gone. One workstation was pulled from the network mid-execution. As the reverse engineer, you analyse the binary, which still carries the developer's fingerprints.
 
 > ⚠️ Defensive/educational analysis of a public training sample. Never run it outside an isolated, snapshotted VM — it overwrites the boot sector and deletes boot files.
-
-![Platform: Q1–Q3 confirmed](screenshots/36-platform-q1-q3.png)
 
 ---
 
@@ -232,7 +230,7 @@ AdjustTokenPrivileges(TokenHandle, false, &NewState, 0x10u, 0, 0);
 
 **Question:** AuraWiper creates a registry policy key to prevent the user from terminating the wiper process. Which registry key is responsible for this?
 **Answer:** `HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\System\DisableTaskMgr`
-*(the platform field is truncated in the screenshot at `…\System\D`; the value name `DisableTaskMgr` is taken from the code below)*
+*(platform-confirmed full path)*
 
 ![sub_140011B50 pseudocode](screenshots/23-ida-sub-140011b50-disabletaskmgr-pseudocode.png)
 ![sub_140011B50 assembly](screenshots/24-ida-sub-140011b50-disabletaskmgr-asm.png)
@@ -401,10 +399,6 @@ call rbx                 ; NtRaiseHardError
 | 13 | `0x140011650` | `DeleteFileA` caller |
 | 14 | `NtRaiseHardError` | `GetProcAddress` string |
 | 15 | `0xDEADDEAD` | `mov ecx, 0DEADDEADh` |
-
-![Platform: Q4–Q8 confirmed](screenshots/37-platform-q4-q8.png)
-![Platform: Q8–Q13 confirmed](screenshots/38-platform-q8-q13.png)
-![Platform: Q11–Q15 confirmed](screenshots/39-platform-q11-q15.png)
 
 ---
 
